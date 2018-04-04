@@ -17,7 +17,7 @@ public class GasStationsTest {
         int tripLength = 100;
         int capacity = 10;
         int fuelUsage = 5;
-        int[][] stations = new int[][]{{0, 200}, {10, 300}};
+        int[][] stations = new int[][]{{0, 200}, {100, 300}};
 
         GasStationsImpl gasStations = new GasStationsImpl();
         try {
