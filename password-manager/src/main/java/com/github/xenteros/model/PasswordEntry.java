@@ -5,4 +5,5 @@ package com.github.xenteros.model;
  * Ponadto, niech pozwala na przechowanie loginu do tego serwisu.
  */
 public class PasswordEntry {
+
 }
