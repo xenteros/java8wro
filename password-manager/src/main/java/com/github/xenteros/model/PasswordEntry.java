@@ -6,4 +6,31 @@ package com.github.xenteros.model;
  */
 public class PasswordEntry {
 
+    private Long id;
+    private String service;
+    private String login;
+    private char[] password;
+
+    public PasswordEntry(Long id, String service, String login, char[] password) {
+        this.id = id;
+        this.service = service;
+        this.login = login;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public char[] getPassword() {
+        return password;
+    }
 }
