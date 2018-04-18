@@ -20,11 +20,22 @@ public class Block {
         this.hash = calculateHash();
     }
 
+    public void mine(int difficulty) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < difficulty; i++) {
+            sb.append("0");
+        }
+        String requiredBeginning = sb.toString();
+        while (!hash.startsWith(requiredBeginning)) {
+            slower = UUID.randomUUID().toString();
+            hash = calculateHash();
+        }
+    }
+
     private String calculateHash() {
         try {
-            String slowerProposition = UUID.randomUUID().toString();
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest((message + previousHash + timestamp + slowerProposition).getBytes("UTF-8"));
+            byte[] hash = digest.digest((message + previousHash + timestamp + slower).getBytes("UTF-8"));
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < hash.length; i++) {
                 String hex = Integer.toHexString(hash[i]);
@@ -34,16 +45,11 @@ public class Block {
                 sb.append(hex);
             }
 
-            String hashProposition = sb.toString();
-            if (hashProposition.startsWith("000")) {
-                this.slower = slowerProposition;
-                return hashProposition;
-            } else {
-                return null;
-            }
+            return sb.toString();
         } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             throw new RuntimeException();
         }
+
     }
 
     public String getMessage() {
