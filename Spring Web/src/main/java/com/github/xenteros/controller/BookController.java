@@ -20,22 +20,22 @@ class BookController {
 
     @GetMapping("/{id}")
     public Book findById(@PathVariable Long id) {
-        return null;
+        return bookService.findOneById(id);
     }
 
     @GetMapping
     public Set<Book> findAll() {
-        return null;
+        return bookService.findAll();
     }
 
     @PostMapping
     public Book create(@RequestBody Book newBook) {
-        return null;
+        return bookService.createBook(newBook);
     }
 
     @DeleteMapping("/{id}")
     public void deleteBook(@PathVariable Long id) {
-        return;
+        bookService.deleteOneById(id);
     }
 
 }
