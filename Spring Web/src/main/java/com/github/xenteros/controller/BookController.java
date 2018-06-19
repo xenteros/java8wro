@@ -1,10 +1,13 @@
 package com.github.xenteros.controller;
 
+import com.github.xenteros.dto.BookCreateDTO;
+import com.github.xenteros.dto.BookDTO;
 import com.github.xenteros.model.Book;
 import com.github.xenteros.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -19,18 +22,25 @@ class BookController {
     }
 
     @GetMapping("/{id}")
-    public Book findById(@PathVariable Long id) {
-        return bookService.findOneById(id);
+    public BookDTO findById(@PathVariable Long id) {
+        Book book =  bookService.findOneById(id);
+        return new BookDTO(book);
     }
 
     @GetMapping
-    public Set<Book> findAll() {
-        return bookService.findAll();
+    public Set<BookDTO> findAll() {
+        Set<BookDTO> result = new HashSet<>();
+
+        Set<Book> all = bookService.findAll();
+        all.forEach(b -> result.add(new BookDTO(b)));
+
+        return result;
     }
 
+
     @PostMapping
-    public Book create(@RequestBody Book newBook) {
-        return bookService.createBook(newBook);
+    public BookDTO create(@RequestBody BookCreateDTO newBook) {
+        return new BookDTO(bookService.createBook(newBook));
     }
 
     @DeleteMapping("/{id}")

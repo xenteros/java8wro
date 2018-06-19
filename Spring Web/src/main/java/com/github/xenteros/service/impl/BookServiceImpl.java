@@ -1,5 +1,6 @@
 package com.github.xenteros.service.impl;
 
+import com.github.xenteros.dto.BookCreateDTO;
 import com.github.xenteros.model.Book;
 import com.github.xenteros.repository.BookRepository;
 import com.github.xenteros.service.BookService;
@@ -30,8 +31,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(Book book) {
-        return bookRepository.save(book);
+    public Book createBook(BookCreateDTO book) {
+        return null;
     }
 
     @Override

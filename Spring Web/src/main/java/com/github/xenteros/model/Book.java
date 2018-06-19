@@ -13,7 +13,7 @@ public class Book {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @ManyToOne(fet)
+    @ManyToOne
     private Author author;
 
     public Book() {
@@ -32,4 +32,7 @@ public class Book {
         return title;
     }
 
+    public Author getAuthor() {
+        return author;
+    }
 }
