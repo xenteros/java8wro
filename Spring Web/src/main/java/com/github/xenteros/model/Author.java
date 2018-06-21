@@ -22,6 +22,25 @@ public class Author {
     @OneToMany(mappedBy = "author")
     private Set<Book> books = new HashSet<>();
 
+    @OneToOne
+    private Address address;
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public Long getId() {
         return id;
     }

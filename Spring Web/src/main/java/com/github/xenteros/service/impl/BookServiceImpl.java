@@ -1,7 +1,9 @@
 package com.github.xenteros.service.impl;
 
 import com.github.xenteros.dto.BookCreateDTO;
+import com.github.xenteros.model.Author;
 import com.github.xenteros.model.Book;
+import com.github.xenteros.repository.AuthorRepository;
 import com.github.xenteros.repository.BookRepository;
 import com.github.xenteros.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,12 @@ import java.util.Set;
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
+    private AuthorRepository authorRepository;
 
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -31,8 +35,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book createBook(BookCreateDTO book) {
-        return null;
+    public Book createBook(BookCreateDTO createDTO) {
+        Author author = authorRepository.findById(createDTO.getAuthorId())
+                .orElseThrow(RuntimeException::new);
+        Book book = new Book();
+        book.setTitle(createDTO.getTitle());
+        book.setAuthor(author);
+        return bookRepository.save(book);
     }
 
     @Override
