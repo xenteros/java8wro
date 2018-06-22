@@ -7,7 +7,7 @@ import java.util.Set;
 
 
 @Entity
-public class Rent {
+public class Rent extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

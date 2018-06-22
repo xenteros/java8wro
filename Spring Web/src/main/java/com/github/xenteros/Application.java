@@ -3,6 +3,8 @@ package com.github.xenteros;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -13,10 +15,18 @@ import static springfox.documentation.builders.PathSelectors.regex;
 
 @SpringBootApplication
 @EnableSwagger2
+@EnableScheduling
 class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+
+
+    //    @Scheduled(fixedRate = 10000L)
+    @Scheduled(cron = "0 * * * * ?")
+    public void scheduled() {
+        System.out.println("Minęło 10 sekund");
     }
 
     @Bean

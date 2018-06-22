@@ -3,13 +3,13 @@ package com.github.xenteros.model;
 import javax.persistence.*;
 
 @Entity
-public class Address {
+public class Address extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String street;
+    private String country;
     @OneToOne(mappedBy = "address")
     private Author author;
 
@@ -21,22 +21,6 @@ public class Address {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public Author getAuthor() {
         return author;
     }
@@ -44,4 +28,6 @@ public class Address {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
+
 }
