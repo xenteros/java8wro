@@ -1,10 +1,13 @@
 package com.github.xenteros;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
@@ -16,6 +19,7 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @SpringBootApplication
 @EnableSwagger2
 @EnableScheduling
+@EnableWebSecurity
 class Application {
 
     public static void main(String[] args) {
@@ -44,5 +48,10 @@ class Application {
                 .description("Simple REST API to learn")
                 .title("Rent a book")
                 .build();
+    }
+
+    @Autowired
+    public void getUserDetailsService(UserDetailsService userDetailsService) {
+        System.out.println(userDetailsService);
     }
 }
